@@ -6,7 +6,7 @@ namespace Subs.Api.Domain.Products
 {
     public class Plan : BaseEntity<int>, IAggregateRoot
     {
-        public virtual IReadOnlyList<PlanRecurrency> Recurrencies { get; init; } = default!;
+        public virtual IReadOnlyCollection<PlanRecurrency> Recurrencies { get; init; } = default!;
         public string Title { get; init; } = default!;
 
         public PlanRecurrency GetRecurrency(RecurrencePeriod period) => Recurrencies.Single(r => r.Period == period);

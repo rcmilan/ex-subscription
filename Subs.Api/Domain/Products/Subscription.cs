@@ -9,7 +9,7 @@ namespace Subs.Api.Domain.Products
         public DateTime CreatedAt { get; init; } = default!;
 
         public Plan CurrentPlan => GetCurrent(PlanHistory);
-        public virtual IList<SubscriptionPlan> PlanHistory { get; set; } = default!;
+        public virtual ICollection<SubscriptionPlan> PlanHistory { get; set; } = default!;
 
         public Subscription Add(Plan plan, PlanRecurrency selectedRecurrency)
         {
