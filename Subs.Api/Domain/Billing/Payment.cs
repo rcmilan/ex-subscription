@@ -8,15 +8,11 @@ namespace Subs.Api.Domain.Billing
         {
         }
 
-        public Payment(int valueInCents) : this()
+        public Payment(int valueInCents, DateOnly expiresAt) : this()
         {
             CratedAt = DateTime.Now;
 
             ValueInCents = valueInCents;
-        }
-
-        public Payment(int valueInCents, DateOnly expiresAt) : this(valueInCents)
-        {
             ExpiresAt = expiresAt;
         }
 

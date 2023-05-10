@@ -34,7 +34,7 @@ namespace Subs.Tests.DomainTests
 
             // Act
             p.Pay();
-            
+
             // Assert
             Assert.Multiple(() =>
             {
@@ -51,7 +51,7 @@ namespace Subs.Tests.DomainTests
 
             // Act
             p.Pay();
-            
+
             // Assert
             Assert.Multiple(() =>
             {
