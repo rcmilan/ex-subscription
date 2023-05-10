@@ -36,6 +36,9 @@ namespace Subs.Api.Domain.Finance
             return this;
         }
 
-        private bool DateOnValidRange(DateTime date) => date.Year <= ExpiresAt.Year && date.Month <= ExpiresAt.Month && date.Day <= ExpiresAt.Day;
+        private bool DateOnValidRange(DateTime date)
+            => date.Year < ExpiresAt.Year ||
+            date.Month < ExpiresAt.Month ||
+            date.Day <= ExpiresAt.Day;
     }
 }
