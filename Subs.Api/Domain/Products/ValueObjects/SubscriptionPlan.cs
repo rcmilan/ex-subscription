@@ -22,7 +22,9 @@ namespace Subs.Api.Domain.Products.ValueObjects
         public virtual Plan Plan { get; init; } = default!;
         public int ValueInCents { get; init; }
 
-        public static Plan GetCurrent(IEnumerable<SubscriptionPlan> plans)
-            => plans.OrderByDescending(p => p.CreatedAt).First().Plan;
+        public static Plan? GetCurrentPlan(IEnumerable<SubscriptionPlan> plans) => GetCurrent(plans)?.Plan;
+
+        public static SubscriptionPlan? GetCurrent(IEnumerable<SubscriptionPlan> plans)
+            => plans?.OrderByDescending(p => p.CreatedAt)?.FirstOrDefault();
     }
 }
