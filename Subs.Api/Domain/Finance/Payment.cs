@@ -14,6 +14,7 @@ namespace Subs.Api.Domain.Finance
 
             ValueInCents = valueInCents;
         }
+
         public Payment(int valueInCents, DateOnly expiresAt) : this(valueInCents)
         {
             ExpiresAt = expiresAt;

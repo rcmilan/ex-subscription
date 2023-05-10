@@ -9,7 +9,7 @@ namespace Subs.Tests.DomainTests
         {
             // Arrange
             // Act
-            var p = new Payment(100, new DateOnly(2000, 1,1));
+            var p = new Payment(100, new DateOnly(2000, 1, 1));
 
             // Assert
             Assert.That(p.IsExpired);
