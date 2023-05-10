@@ -43,6 +43,7 @@ namespace Subs.Tests.DomainTests
             subscription.Add(plan, recurrencyPeriod);
 
             // Assert
+            Assert.That(subscription.Current, Is.Not.Null);
             Assert.That(subscription.Current.Period, Is.EqualTo(recurrencyPeriod));
         }
 
@@ -66,6 +67,7 @@ namespace Subs.Tests.DomainTests
             subscription.Add(plan, RecurrencePeriod.Year);
 
             // Assert
+            Assert.That(subscription.Current, Is.Not.Null);
             Assert.That(subscription.Current.Period, Is.EqualTo(RecurrencePeriod.Year));
         }
     }

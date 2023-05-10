@@ -9,7 +9,7 @@ namespace Subs.Api.Domain.Products
     {
         public DateTime CreatedAt { get; init; } = DateTime.Now;
 
-        public SubscriptionPlan Current => GetCurrent(PlanHistory);
+        public SubscriptionPlan? Current => GetCurrent(PlanHistory);
 
         public virtual ICollection<SubscriptionPlan> PlanHistory { get; set; } = new List<SubscriptionPlan>();
 
