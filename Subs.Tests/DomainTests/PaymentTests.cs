@@ -1,4 +1,4 @@
-﻿using Subs.Api.Domain.Finance;
+﻿using Subs.Api.Domain.Billing;
 
 namespace Subs.Tests.DomainTests
 {

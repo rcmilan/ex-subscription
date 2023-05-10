@@ -1,5 +1,5 @@
 ﻿using Subs.Api.Domain.Base;
-using Subs.Api.Domain.Finance;
+using Subs.Api.Domain.Billing;
 
 namespace Subs.Api.Domain.Users
 {

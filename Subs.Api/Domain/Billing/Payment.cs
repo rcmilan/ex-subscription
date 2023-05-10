@@ -1,6 +1,6 @@
 ﻿using Subs.Api.Domain.Base;
 
-namespace Subs.Api.Domain.Finance
+namespace Subs.Api.Domain.Billing
 {
     public class Payment : BaseEntity<Guid>
     {
@@ -23,7 +23,7 @@ namespace Subs.Api.Domain.Finance
         public DateTime CratedAt { get; init; }
         public DateOnly ExpiresAt { get; init; }
         public bool IsExpired => !DateOnValidRange(DateTime.Now);
-        public bool IsPaid => (PaidAt > DateTime.MinValue) && DateOnValidRange(PaidAt);
+        public bool IsPaid => PaidAt > DateTime.MinValue && DateOnValidRange(PaidAt);
         public DateTime PaidAt { get; set; } = DateTime.MinValue;
         public int ValueInCents { get; init; }
 
