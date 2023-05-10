@@ -2,7 +2,7 @@
 
 namespace Subs.Api.Domain.Billing
 {
-    public class Payment : BaseEntity<Guid>
+    public class Payment : BaseEntity<Guid>, IAggregateRoot
     {
         public Payment()
         {
