@@ -14,22 +14,27 @@ namespace Subs.Api.Domain.Finance
 
             ValueInCents = valueInCents;
         }
+        public Payment(int valueInCents, DateOnly expiresAt) : this(valueInCents)
+        {
+            ExpiresAt = expiresAt;
+        }
 
         public DateTime CratedAt { get; init; }
         public DateOnly ExpiresAt { get; init; }
+        public bool IsExpired => !DateOnValidRange(DateTime.Now);
         public bool IsPaid => (PaidAt > DateTime.MinValue) && DateOnValidRange(PaidAt);
         public DateTime PaidAt { get; set; } = DateTime.MinValue;
         public int ValueInCents { get; init; }
 
         public Payment Pay()
         {
-            if (DateOnValidRange(DateTime.Now) || IsPaid) return this;
+            if (IsExpired || IsPaid) return this;
 
             PaidAt = DateTime.Now;
 
             return this;
         }
 
-        private bool DateOnValidRange(DateTime date) => ExpiresAt.CompareTo(date) >= 0;
+        private bool DateOnValidRange(DateTime date) => date.Year <= ExpiresAt.Year && date.Month <= ExpiresAt.Month && date.Day <= ExpiresAt.Day;
     }
 }
