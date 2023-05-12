@@ -70,5 +70,20 @@ namespace Subs.Tests.DomainTests
             Assert.That(subscription.Current, Is.Not.Null);
             Assert.That(subscription.Current.Period, Is.EqualTo(RecurrencePeriod.Year));
         }
+
+        [Test]
+        [TestCase(0, false)]
+        [TestCase(7, true)]
+        public void ShouldReturnInTrial(int days, bool expected)
+        {
+            // Arrange
+            var s = new Subscription();
+
+            // Act
+            s.UpsertTrial(days);
+
+            // Assert
+            Assert.That(s.Detail.InTrial, Is.EqualTo(expected));
+        }
     }
 }
