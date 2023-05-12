@@ -8,9 +8,8 @@ namespace Subs.Api.Domain.Products
     public class Subscription : BaseEntity<Guid>, IAggregateRoot
     {
         public DateTime CreatedAt { get; init; } = DateTime.Now;
-
         public SubscriptionPlan? Current => GetCurrent(PlanHistory);
-
+        public virtual SubscriptionDetail Detail { get; set; } = default!;
         public virtual ICollection<SubscriptionPlan> PlanHistory { get; set; } = new List<SubscriptionPlan>();
 
         public Subscription Add(Plan plan, RecurrencePeriod selectedRecurrencyPeriod) => Add(plan, plan.GetRecurrency(selectedRecurrencyPeriod));

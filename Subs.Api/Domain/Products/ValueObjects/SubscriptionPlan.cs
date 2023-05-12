@@ -18,11 +18,12 @@ namespace Subs.Api.Domain.Products.ValueObjects
         }
 
         public DateTime CreatedAt { get; init; }
+        
         public RecurrencePeriod Period { get; init; }
-        public virtual Plan Plan { get; init; } = default!;
-        public int ValueInCents { get; init; }
 
-        public static Plan? GetCurrentPlan(IEnumerable<SubscriptionPlan> plans) => GetCurrent(plans)?.Plan;
+        public virtual Plan Plan { get; init; } = default!;
+
+        public int ValueInCents { get; init; }
 
         public static SubscriptionPlan? GetCurrent(IEnumerable<SubscriptionPlan> plans)
             => plans?.OrderByDescending(p => p.CreatedAt)?.FirstOrDefault();
