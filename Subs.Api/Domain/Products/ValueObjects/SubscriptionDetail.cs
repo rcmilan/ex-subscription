@@ -16,6 +16,5 @@ namespace Subs.Api.Domain.Products.ValueObjects
         public DateOnly TrialEnd { get; set; } = DateOnly.MinValue;
 
         public DateOnly TrialStart { get; set; } = DateOnly.MinValue;
-
     }
 }
