@@ -6,7 +6,12 @@ namespace Subs.Api.Domain.Products.ValueObjects
     {
         public SubscriptionStage Condition { get; set; } = SubscriptionStage.Inactive;
 
-        public bool InTrial => TrialStart <= DateOnly.FromDateTime(DateTime.Now) && TrialEnd >= DateOnly.FromDateTime(DateTime.Now);
+        public bool InTrial(DateTime? dateReference = null)
+        {
+            dateReference ??= DateTime.Now;
+
+            return TrialStart <= DateOnly.FromDateTime((DateTime)dateReference) && TrialEnd >= DateOnly.FromDateTime((DateTime)dateReference);
+        }
 
         public DateOnly TrialEnd { get; set; } = DateOnly.MinValue;
 

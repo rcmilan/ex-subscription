@@ -83,7 +83,7 @@ namespace Subs.Tests.DomainTests
             s.UpsertTrial(days);
 
             // Assert
-            Assert.That(s.Detail.InTrial, Is.EqualTo(expected));
+            Assert.That(s.Detail.InTrial(), Is.EqualTo(expected));
         }
     }
 }

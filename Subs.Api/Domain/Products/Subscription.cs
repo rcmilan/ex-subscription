@@ -41,15 +41,17 @@ namespace Subs.Api.Domain.Products
             }
         }
 
-        public Subscription UpsertTrial(int trialDays)
+        public Subscription UpsertTrial(int trialDays, DateTime? trialStart = null)
         {
+            trialStart ??= DateTime.Now;
+
             var invalidTrialScenario = trialDays < 1 ||
                 Detail.Condition == SubscriptionStage.Active ||
                 Detail.TrialStart != DateOnly.MinValue;
 
             if (invalidTrialScenario) return this;
 
-            Detail.TrialStart = DateOnly.FromDateTime(DateTime.Now);
+            Detail.TrialStart = DateOnly.FromDateTime((DateTime)trialStart);
             Detail.TrialEnd = Detail.TrialStart.AddDays(trialDays);
 
             SetStatus(SubscriptionStage.Trial);

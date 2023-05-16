@@ -18,7 +18,7 @@ namespace Subs.Api.Domain.Products.ValueObjects
         }
 
         public DateTime CreatedAt { get; init; }
-        
+
         public RecurrencePeriod Period { get; init; }
 
         public virtual Plan Plan { get; init; } = default!;
