@@ -7,22 +7,6 @@ namespace Subs.Tests.DomainTests
     internal class SubscriptionTests
     {
         [Test]
-        public void ShouldCreateEmptySub()
-        {
-            // Arrange
-            // Act
-            var s = new Subscription();
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(s.CreatedAt.Date, Is.EqualTo(DateTime.Now.Date));
-                Assert.That(s.Current, Is.Null);
-                Assert.That(s.PlanHistory, Is.Empty);
-            });
-        }
-
-        [Test]
         [TestCase(RecurrencePeriod.Month)]
         [TestCase(RecurrencePeriod.Year)]
         public void ShouldAddPlanToSub(RecurrencePeriod recurrencyPeriod)
@@ -48,6 +32,37 @@ namespace Subs.Tests.DomainTests
         }
 
         [Test]
+        public void ShouldCreateEmptySub()
+        {
+            // Arrange
+            // Act
+            var s = new Subscription();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(s.CreatedAt.Date, Is.EqualTo(DateTime.Now.Date));
+                Assert.That(s.Current, Is.Null);
+                Assert.That(s.PlanHistory, Is.Empty);
+            });
+        }
+
+        [Test]
+        [TestCase(0, TrialStage.None)]
+        [TestCase(7, TrialStage.InTrial)]
+        public void ShouldReturnInTrial(int days, TrialStage expected)
+        {
+            // Arrange
+            var s = new Subscription();
+
+            // Act
+            s.UpsertTrial(days);
+
+            // Assert
+            Assert.That(s.Detail.IsInTrial(), Is.EqualTo(expected));
+        }
+
+        [Test]
         public void ShouldUpgrade()
         {
             // Arrange
@@ -69,21 +84,6 @@ namespace Subs.Tests.DomainTests
             // Assert
             Assert.That(subscription.Current, Is.Not.Null);
             Assert.That(subscription.Current.Period, Is.EqualTo(RecurrencePeriod.Year));
-        }
-
-        [Test]
-        [TestCase(0, false)]
-        [TestCase(7, true)]
-        public void ShouldReturnInTrial(int days, bool expected)
-        {
-            // Arrange
-            var s = new Subscription();
-
-            // Act
-            s.UpsertTrial(days);
-
-            // Assert
-            Assert.That(s.Detail.InTrial(), Is.EqualTo(expected));
         }
     }
 }

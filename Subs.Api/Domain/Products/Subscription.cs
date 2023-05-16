@@ -45,11 +45,7 @@ namespace Subs.Api.Domain.Products
         {
             trialStart ??= DateTime.Now;
 
-            var invalidTrialScenario = trialDays < 1 ||
-                Detail.Condition == SubscriptionStage.Active ||
-                Detail.TrialStart != DateOnly.MinValue;
-
-            if (invalidTrialScenario) return this;
+            if (IsValidTrial(trialDays)) return this;
 
             Detail.TrialStart = DateOnly.FromDateTime((DateTime)trialStart);
             Detail.TrialEnd = Detail.TrialStart.AddDays(trialDays);
@@ -58,5 +54,7 @@ namespace Subs.Api.Domain.Products
 
             return this;
         }
+
+        private bool IsValidTrial(int trialDays) => trialDays < 1 || Detail.Condition == SubscriptionStage.Active || Detail.TrialStart != DateOnly.MinValue;
     }
 }
